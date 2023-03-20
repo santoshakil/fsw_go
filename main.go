@@ -71,6 +71,7 @@ func main() {
 			if !ok {
 				return
 			}
+			fmt.Println("event: ", event)
 			if event.Op&fsnotify.Write == fsnotify.Write ||
 				event.Op&fsnotify.Create == fsnotify.Create ||
 				event.Op&fsnotify.Remove == fsnotify.Remove ||
@@ -84,7 +85,6 @@ func main() {
 			}
 			log.Println("Error:", err)
 		case <-updateChan:
-			fmt.Println("Directory tree updated:")
 			for parentDir, files := range directoryTree {
 				fmt.Println(parentDir)
 				for _, file := range files {
